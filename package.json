@@ -1,0 +1,19 @@
+{
+  "name": "svgcombiner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/.bin/ava test/*.js --verbose"
+  },
+  "author": "Larry Davis <lawdavis@adobe.com>",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "fs-extra": "^6.0.1"
+  },
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "svgo": "^1.0.5"
+  }
+}
