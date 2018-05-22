@@ -45,6 +45,7 @@ function processVariant(iconPath, variant, config) {
 
 function processIcon(icon, iconName, config) {
   var promise = new Promise(function(resolve, reject) {
+    // Create a wrapper to contain the icon
     var $ = loadXML('<symbol/>');
     var $symbol = $('symbol');
     $symbol.attr('id', config.idPrefix + iconName);
@@ -87,7 +88,7 @@ module.exports = function combine(icons, config) {
   var promise = new Promise(function(resolve, reject) {
     // Wait for all icons to be processed
     Promise.all(promises).then(function() {
-      resolve($.html());
+      resolve($.xml());
     })
     .catch(function(err) {
       reject(err);
