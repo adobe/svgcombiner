@@ -1,4 +1,3 @@
-<svg id="icons" xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6">
-  <title>S_UiCornerTriangle_6_N@1x</title>
-  <path id="Shape" d="M6,.25v5.5A.25.25,0,0,1,5.75,6H.25a.25.25,0,0,1-.17675-.4268l5.5-5.49995A.25.25,0,0,1,6,.25Z"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6">
+  <path d="M6,.25v5.5A.25.25,0,0,1,5.75,6H.25a.25.25,0,0,1-.17675-.4268l5.5-5.49995A.25.25,0,0,1,6,.25Z"/>
 </svg>

@@ -1,9 +1,4 @@
 const cheerio = require('cheerio');
-const fs = require('fs-extra')
-const path = require('path');
-const SVGO = require('svgo');
-const Promise = require('promise');
-const svgo = new SVGO();
 
 function loadXML(text) {
   return cheerio.load(text, {
@@ -11,85 +6,39 @@ function loadXML(text) {
   });
 }
 
-function processVariant(iconPath, variant, config) {
-  return fs.readFile(iconPath)
-    .then(function(svgContents) {
-      return svgo.optimize(svgContents);
-    })
-    .then(function(result) {
-      var svgContents = result.data;
+function combine(iconName, icons) {
+  var $ = loadXML('<svg xmlns="http://www.w3.org/2000/svg"/>');
+  var $outerSvg = $('svg');
 
-      var $ = loadXML(svgContents);
-      var $svg = $('svg');
+  var $symbol = $('<symbol/>');
+  $symbol.attr('id', iconName);
 
-      var $group;
-      if ($svg.children().length > 1) {
-        // Create group to house the children
-        $group = $('<g/>');
+  for (var variantName in icons) {
+    var svgContents = icons[variantName];
 
-        $group.append($svg.children());
-      }
-      else {
-        // Just use the first child
-        $group = $($svg.children().first());
-      }
+    // Parse SVG icon
+    var $svg = $(svgContents);
 
-      $group.addClass(config.classPrefix + variant);
+    var $group;
+    if ($svg.children().length > 1) {
+      // Create group to house the children
+      $group = $('<g/>');
 
-      return $group;
-    });
-}
-
-function processIcon(icon, iconName, config) {
-  return new Promise(function(resolve, reject) {
-    // Create a wrapper to contain the icon
-    var $ = loadXML('<symbol/>');
-    var $symbol = $('symbol');
-    $symbol.attr('id', config.idPrefix + iconName);
-
-    // Process each variant
-    var promises = [];
-    for (var variant in icon) {
-      var iconPath = path.resolve(icon[variant]);
-      promises.push(processVariant(iconPath, variant, config));
+      $group.append($svg.children());
+    }
+    else {
+      // Just use the first child
+      $group = $($svg.children().first());
     }
 
-    Promise.all(promises).then(function(results) {
-      // Add variants into the group in order
-      results.forEach(function($group) {
-        $symbol.append($group);
-      });
+    $group.addClass(variantName);
 
-      resolve($symbol);
-    })
-    .catch(function(err) {
-      reject(err);
-    });
-  });
-}
-
-module.exports = function combine(icons, config) {
-  var $ = loadXML('<svg xmlns="http://www.w3.org/2000/svg"/>');
-  var $sheet = $('svg');
-
-  // Process each icon
-  var promises = [];
-  for (var iconName in icons) {
-    var icon = icons[iconName];
-    promises.push(processIcon(icon, iconName, config));
+    $symbol.append($group);
   }
 
-  return new Promise(function(resolve, reject) {
-    Promise.all(promises).then(function(results) {
-      // Add icons into the sheet in order
-      results.forEach(function($symbol) {
-        $sheet.append($symbol);
-      });
+  $outerSvg.append($symbol);
 
-      resolve($.xml());
-    })
-    .catch(function(err) {
-      reject(err);
-    });
-  });
-};
+  return $.html();
+}
+
+module.exports = combine;

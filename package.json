@@ -9,10 +9,7 @@
   "author": "Larry Davis <lawdavis@adobe.com>",
   "license": "BSD-2-Clause",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.2",
-    "fs-extra": "^6.0.1",
-    "svgo": "^1.0.5",
-    "promise": "^8.0.1"
+    "cheerio": "^1.0.0-rc.2"
   },
   "devDependencies": {
     "ava": "^0.25.0",
