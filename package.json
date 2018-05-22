@@ -7,7 +7,7 @@
     "test": "node_modules/.bin/ava test/*.js --verbose"
   },
   "author": "Larry Davis <lawdavis@adobe.com>",
-  "license": "BSD-2-Clause",
+  "license": "Apache-2.0",
   "dependencies": {
     "cheerio": "^1.0.0-rc.2"
   },

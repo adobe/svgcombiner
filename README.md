@@ -48,14 +48,44 @@ When this SVG is embedded in the page, the following CSS can then be used to tog
 }
 ```
 
-## Viewbox
+Or, you could use media queries to switch between icon sets:
+
+```css
+.icon-medium {
+  display: inline;
+}
+
+.icon-large {
+  display: none;
+}
+
+@media (min-width:480px) {
+  .icon-large {
+    display: inline;
+  }
+
+  .ui-medium .icon-medium {
+    display: none;
+  }
+}
+```
+
+#### Viewbox
 
 The size of the viewboxes does not have to match, and viewbox is ignored entirely. You must size the icons using CSS if the size changes.
 
-## Spritesheets
+#### Spritesheets
 
 The resulting SVGs can be combined into spritesheets using other utilities.
 
-## Minification
+#### Minification
 
 You should probably minify your SVGs before passing them to svgcombiner.
+
+### Contributing
+
+Contributions are welcomed! Read the [Contributing Guide](.github/CONTRIBUTING.md) for more information.
+
+### Licensing
+
+This project is licensed under the Apache V2 License. See [LICENSE](LICENSE) for more information.
