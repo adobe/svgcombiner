@@ -30,70 +30,66 @@ function processVariant(iconPath, variant, config) {
         $group.append($svg.children());
       }
       else {
+        // Just use the first child
         $group = $($svg.children().first());
       }
 
       $group.addClass(config.classPrefix + variant);
 
       return $group;
-    })
-    .catch(function(err) {
-      console.error(err);
-      reject(err);
     });
 }
 
 function processIcon(icon, iconName, config) {
-  var promise = new Promise(function(resolve, reject) {
+  return new Promise(function(resolve, reject) {
     // Create a wrapper to contain the icon
     var $ = loadXML('<symbol/>');
     var $symbol = $('symbol');
     $symbol.attr('id', config.idPrefix + iconName);
 
+    // Process each variant
     var promises = [];
     for (var variant in icon) {
       var iconPath = path.resolve(icon[variant]);
-
-      promises.push(
-        processVariant(iconPath, variant, config).then(function($group) {
-          $symbol.append($group);
-        })
-      );
+      promises.push(processVariant(iconPath, variant, config));
     }
 
-    // Wait for all files to be read and processed
-    Promise.all(promises).then(function() {
+    Promise.all(promises).then(function(results) {
+      // Add variants into the group in order
+      results.forEach(function($group) {
+        $symbol.append($group);
+      });
+
       resolve($symbol);
+    })
+    .catch(function(err) {
+      reject(err);
     });
   });
-
-  return promise;
 }
 
 module.exports = function combine(icons, config) {
   var $ = loadXML('<svg xmlns="http://www.w3.org/2000/svg"/>');
   var $sheet = $('svg');
 
+  // Process each icon
   var promises = [];
   for (var iconName in icons) {
     var icon = icons[iconName];
-    promises.push(
-      processIcon(icon, iconName, config)
-        .then(function($symbol) {
-          $sheet.append($symbol);
-        })
-    );
+    promises.push(processIcon(icon, iconName, config));
   }
 
-  var promise = new Promise(function(resolve, reject) {
-    // Wait for all icons to be processed
-    Promise.all(promises).then(function() {
+  return new Promise(function(resolve, reject) {
+    Promise.all(promises).then(function(results) {
+      // Add icons into the sheet in order
+      results.forEach(function($symbol) {
+        $sheet.append($symbol);
+      });
+
       resolve($.xml());
     })
     .catch(function(err) {
       reject(err);
     });
   });
-
-  return promise;
 };
