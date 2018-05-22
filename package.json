@@ -1,7 +1,7 @@
 {
   "name": "svgcombiner",
   "version": "1.0.0",
-  "description": "",
+  "description": "Combines SVGs into a single spritesheet that supports CSS-selector driven variants",
   "main": "index.js",
   "scripts": {
     "test": "node_modules/.bin/ava test/*.js --verbose"
@@ -11,10 +11,11 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
     "fs-extra": "^6.0.1",
+    "svgo": "^1.0.5",
     "promise": "^8.0.1"
   },
   "devDependencies": {
     "ava": "^0.25.0",
-    "svgo": "^1.0.5"
+    "xml-formatter": "^1.0.1"
   }
 }
