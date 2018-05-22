@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "nyc ava test/*.js --verbose",
-    "coverage": "nyc report -r lcovonly && codecov"
+    "coverage": "nyc report -r lcovonly && codecov",
+    "prepublish": "npm test"
   },
   "author": "Larry Davis <lawdavis@adobe.com>",
   "license": "Apache-2.0",

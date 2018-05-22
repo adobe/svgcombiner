@@ -7,7 +7,6 @@ For instance, the included test processes the following files:
 
 * `test/medium/S_UICornerTriangle_5_N@1x.svg`
 * `test/large/S_UICornerTriangle_6_N@1x.svg`
-
 Given the following configuration:
 
 ```js
@@ -28,7 +27,17 @@ The result is:
 </svg>
 ```
 
-When this SVG is embedded in the page, the following CSS can then be used to toggle the two different `CornerTriangle` icons as necessary, depending on which UI size you're displaying:
+Assuming you've embeded this SVG in the page and referenced the symbol with `<use>`:
+
+```
+<div class="checkbox">
+  <svg class="icon" focusable="false" aria-hidden="true">
+    <use xlink:href="#icon-CheckboxCheckmark"></use>
+  </svg>
+</div>
+```
+
+You could then use the following CSS to switch between the medium and large icons:
 
 ```css
 /* Hide all icons by default */
