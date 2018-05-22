@@ -1,7 +1,7 @@
 # svgcombiner
 > Let your CSS classes choose which icon to display
 
-This utility combines multiple SVGs into a single symbol. Each SVG within the symbol is given a classname that can be used to toggle its visibility, such that icons can be swapped out by showing or hidding the respective CSS class.
+This utility combines multiple SVGs into a single symbol. Each SVG within the symbol is given a classname that can be used to toggle its visibility, such that icons can be swapped out by showing or hiding the respective CSS class.
 
 For instance, the included test processes the following files:
 
