@@ -1,7 +1,7 @@
 {
   "name": "svgcombiner",
-  "version": "1.0.0",
-  "description": "Combines SVGs into a single spritesheet that supports CSS-selector driven variants",
+  "version": "1.0.1",
+  "description": "Combines multiple SVGs into a single SVG that supports CSS-selector driven variants",
   "main": "index.js",
   "scripts": {
     "test": "nyc ava test/*.js --verbose",
