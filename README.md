@@ -1,7 +1,7 @@
 # svgcombiner
 > Let your CSS classes choose which icon to display
 
-This utility combines multiple SVGs into a single symbol. Each SVG within the symbol is given a classname that can be used to toggle its visibility, such that icons can be swapped out by showing or hiding the respective CSS class.
+This utility combines multiple SVGs into a single SVG. Each source SVG is given a classname that can be used to toggle its visibility, such that icons can be swapped out by showing or hiding the respective CSS class.
 
 For instance, the included test processes the following files:
 
@@ -19,11 +19,9 @@ combine('CornerTriangle', {
 The result is:
 
 ```xml
-<svg xmlns="http://www.w3.org/2000/svg">
-  <symbol id="CornerTriangle">
-    <path d="M5,.60355V4.75A.25.25,0,0,1,4.75,5H.60355A.25.25,0,0,1,.4268,4.5732L4.5732.4268A.25.25,0,0,1,5,.60355Z" class="icon-medium"/>
-    <path d="M6,.25v5.5A.25.25,0,0,1,5.75,6H.25a.25.25,0,0,1-.17675-.4268l5.5-5.49995A.25.25,0,0,1,6,.25Z" class="icon-large"/>
-  </symbol>
+<svg xmlns="http://www.w3.org/2000/svg" id="CornerTriangle">
+  <path d="M5,.60355V4.75A.25.25,0,0,1,4.75,5H.60355A.25.25,0,0,1,.4268,4.5732L4.5732.4268A.25.25,0,0,1,5,.60355Z" class="icon-medium"/>
+  <path d="M6,.25v5.5A.25.25,0,0,1,5.75,6H.25a.25.25,0,0,1-.17675-.4268l5.5-5.49995A.25.25,0,0,1,6,.25Z" class="icon-large"/>
 </svg>
 ```
 

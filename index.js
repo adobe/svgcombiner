@@ -22,8 +22,7 @@ function combine(iconName, icons) {
   var $ = loadXML('<svg xmlns="http://www.w3.org/2000/svg"/>');
   var $outerSvg = $('svg');
 
-  var $symbol = $('<symbol/>');
-  $symbol.attr('id', iconName);
+  $outerSvg.attr('id', iconName);
 
   for (var variantName in icons) {
     var svgContents = icons[variantName];
@@ -45,10 +44,8 @@ function combine(iconName, icons) {
 
     $group.addClass(variantName);
 
-    $symbol.append($group);
+    $outerSvg.append($group);
   }
-
-  $outerSvg.append($symbol);
 
   return $.html();
 }
