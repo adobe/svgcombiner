@@ -42,9 +42,24 @@ function combine(iconName, icons) {
       $group = $($svg.children().first());
     }
 
-    $group.addClass(variantName);
+    // Check for duplicates
+    var isUnique = Array.prototype.every.call($outerSvg.children(), function(svgChild) {
+      // Strip classnames so we just compare the important stuff
+      var isDuplicate = $.html($group).replace(/ class=".*?"/, '') === $.html(svgChild).replace(/ class=".*?"/, '');
 
-    $outerSvg.append($group);
+      if (isDuplicate) {
+        // Add our classname to the existing duplicate
+        $(svgChild).addClass(variantName);
+      }
+
+      return !isDuplicate;
+    });
+
+    if (isUnique) {
+      $group.addClass(variantName);
+
+      $outerSvg.append($group);
+    }
   }
 
   return $.html();

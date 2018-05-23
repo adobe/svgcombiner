@@ -25,17 +25,18 @@ The result is:
 </svg>
 ```
 
-Assuming you've embeded this SVG in the page and referenced the symbol with `<use>`:
+If you embed this SVG in the page (or include it as part of a spritesheet and embed it with `<use>`):
 
 ```
 <div class="checkbox">
-  <svg class="icon" focusable="false" aria-hidden="true">
-    <use xlink:href="#icon-CheckboxCheckmark"></use>
+  <svg xmlns="http://www.w3.org/2000/svg" id="CornerTriangle">
+    <path d="M5,.60355V4.75A.25.25,0,0,1,4.75,5H.60355A.25.25,0,0,1,.4268,4.5732L4.5732.4268A.25.25,0,0,1,5,.60355Z" class="icon-medium"/>
+    <path d="M6,.25v5.5A.25.25,0,0,1,5.75,6H.25a.25.25,0,0,1-.17675-.4268l5.5-5.49995A.25.25,0,0,1,6,.25Z" class="icon-large"/>
   </svg>
 </div>
 ```
 
-You could then use the following CSS to switch between the medium and large icons:
+You can then use the following CSS to switch between the medium and large icons:
 
 ```css
 /* Hide all icons by default */
@@ -55,27 +56,37 @@ You could then use the following CSS to switch between the medium and large icon
 }
 ```
 
-Or, you could use media queries to switch between icon sets:
+Or, you can use media queries:
 
 ```css
-.icon-medium {
-  display: inline;
-}
-
+/* First, hide the icons */
 .icon-large {
   display: none;
 }
 
+/* Show the default set */
+.icon-medium {
+  display: inline;
+}
+
 @media (min-width:480px) {
+  /* Hide the icons that shouldn't display */
+  .icon-medium {
+    display: none;
+  }
+
+  /* Show the icons that should */
   .icon-large {
     display: inline;
   }
-
-  .ui-medium .icon-medium {
-    display: none;
-  }
 }
 ```
+
+Note that, in all cases, you should hide icons first and show them later. This is helpful when de-duping adds both classnames.
+
+#### De-duping
+
+If identical SVGs are passed, `svgcombiner` will include the SVG contents only once, but will add both of the expected classnames. As a result, you'll need to make sure the rules in your CSS that show icons come after the rules that hide icons (as above).
 
 #### Viewbox
 

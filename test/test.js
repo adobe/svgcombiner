@@ -38,3 +38,15 @@ test('should correctly group SVGs with more than one child', function(t) {
     format(fs.readFileSync('test/More.svg', 'utf8'))
   );
 });
+
+test('should combine duplicates', function(t) {
+  var svg = combine('More', {
+    'icon-medium': fs.readFileSync('test/medium/S_UIMore_18_N@1x.svg', 'utf8'),
+    'icon-large': fs.readFileSync('test/medium/S_UIMore_18_N@1x.svg', 'utf8')
+  });
+
+  t.is(
+    format(svg),
+    format(fs.readFileSync('test/More_DeDuped.svg', 'utf8'))
+  );
+});
