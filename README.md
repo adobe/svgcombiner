@@ -1,4 +1,7 @@
 # svgcombiner
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/adobe/svgcombiner.svg)](https://greenkeeper.io/)
+
 > Let your CSS classes choose which icon to display
 
 This utility combines multiple SVGs into a single SVG. Each source SVG is given a classname that can be used to toggle its visibility, such that icons can be swapped out by showing or hiding the respective CSS class.
