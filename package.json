@@ -16,7 +16,7 @@
   "devDependencies": {
     "ava": "^0.25.0",
     "codecov": "^3.0.2",
-    "nyc": "^11.8.0",
+    "nyc": "^13.1.0",
     "xml-formatter": "^1.0.1"
   }
 }
